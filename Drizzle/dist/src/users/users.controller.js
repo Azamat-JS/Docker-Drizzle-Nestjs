@@ -16,6 +16,7 @@ exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const create_user_request_1 = require("./dto/create_user_request");
+const create_profile_1 = require("./dto/create-profile");
 let UsersController = class UsersController {
     usersService;
     constructor(usersService) {
@@ -26,6 +27,9 @@ let UsersController = class UsersController {
     }
     async createUser(request) {
         return this.usersService.createUser(request);
+    }
+    async createProfile(req) {
+        return this.usersService.createProfile(req);
     }
 };
 exports.UsersController = UsersController;
@@ -42,6 +46,13 @@ __decorate([
     __metadata("design:paramtypes", [create_user_request_1.CreateUserRequest]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "createUser", null);
+__decorate([
+    (0, common_1.Post)('profile'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_profile_1.CreateProfileRequest]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "createProfile", null);
 exports.UsersController = UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])

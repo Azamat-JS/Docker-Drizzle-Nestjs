@@ -15,6 +15,13 @@
       "when": 1756130799896,
       "tag": "0001_silky_gorgon",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756143278811,
+      "tag": "0002_salty_payback",
+      "breakpoints": true
     }
   ]
 }

@@ -24,11 +24,14 @@ let UsersService = class UsersService {
     }
     async getUsers() {
         return this.database.query.users.findMany({
-            with: { posts: true }
+            with: { posts: true, profile: true }
         });
     }
     async createUser(user) {
         return this.database.insert(schema.users).values(user);
+    }
+    async createProfile(profile) {
+        await this.database.insert(schema.profile).values(profile);
     }
 };
 exports.UsersService = UsersService;
