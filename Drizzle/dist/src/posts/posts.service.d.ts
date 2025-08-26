@@ -115,4 +115,11 @@ export declare class PostsService {
         timestamp: Date | null;
         userId: number | null;
     } | undefined>;
+    updatePost(postId: number, post: typeof schema.posts.$inferInsert): Promise<{
+        id: number;
+        content: string | null;
+        published: boolean | null;
+        timestamp: Date | null;
+        userId: number | null;
+    }[]>;
 }

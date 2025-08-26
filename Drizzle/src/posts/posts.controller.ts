@@ -12,6 +12,11 @@ export class PostsController {
     return this.postsService.create(createPostDto);
   }
 
+  @Patch(':id')
+  async updatePost(@Param('id') postId: string, @Body() request: {content:string}){
+    return this.postsService.updatePost(parseInt(postId), request)
+  }
+
   @Get()
   findAll() {
     return this.postsService.findAll();

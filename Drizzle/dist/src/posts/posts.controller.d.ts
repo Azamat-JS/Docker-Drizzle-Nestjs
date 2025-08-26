@@ -95,6 +95,15 @@ export declare class PostsController {
         };
         dialect: "pg";
     }>, import("drizzle-orm/node-postgres").NodePgQueryResultHKT, undefined, undefined, false, never>;
+    updatePost(postId: string, request: {
+        content: string;
+    }): Promise<{
+        id: number;
+        content: string | null;
+        published: boolean | null;
+        timestamp: Date | null;
+        userId: number | null;
+    }[]>;
     findAll(): Promise<{
         id: number;
         content: string | null;

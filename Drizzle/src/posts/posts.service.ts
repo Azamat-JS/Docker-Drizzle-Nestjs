@@ -16,13 +16,17 @@ export class PostsService {
 
   async findAll() {
     return this.database.query.posts.findMany({
-      with: { user: true, postsToCategories:true }
+      with: { user: true, postsToCategories: true }
     })
   }
 
-  async getPost(postId:number){
+  async getPost(postId: number) {
     return this.database.query.posts.findFirst({
       where: eq(schema.posts.id, postId)
     })
+  }
+
+  async updatePost(postId: number, post: typeof schema.posts.$inferInsert) {
+    return this.database.update(schema.posts).set(post).where(eq(schema.posts.id, postId)).returning()
   }
 }

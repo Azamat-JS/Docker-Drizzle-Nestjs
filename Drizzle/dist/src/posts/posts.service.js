@@ -36,6 +36,9 @@ let PostsService = class PostsService {
             where: (0, drizzle_orm_1.eq)(schema.posts.id, postId)
         });
     }
+    async updatePost(postId, post) {
+        return this.database.update(schema.posts).set(post).where((0, drizzle_orm_1.eq)(schema.posts.id, postId)).returning();
+    }
 };
 exports.PostsService = PostsService;
 exports.PostsService = PostsService = __decorate([

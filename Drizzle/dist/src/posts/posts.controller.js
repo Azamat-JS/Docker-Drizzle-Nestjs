@@ -24,6 +24,9 @@ let PostsController = class PostsController {
     create(createPostDto) {
         return this.postsService.create(createPostDto);
     }
+    async updatePost(postId, request) {
+        return this.postsService.updatePost(parseInt(postId), request);
+    }
     findAll() {
         return this.postsService.findAll();
     }
@@ -39,6 +42,14 @@ __decorate([
     __metadata("design:paramtypes", [create_post_dto_1.CreatePostDto]),
     __metadata("design:returntype", void 0)
 ], PostsController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], PostsController.prototype, "updatePost", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
