@@ -28,13 +28,22 @@ let PostsService = class PostsService {
     }
     async create(post, category) {
         await this.database.transaction(async (tx) => {
-            const newPost = await tx.insert(schema.posts).values(post).returning({ id: schema.posts.id });
+            const posts = await tx
+                .insert(schema.posts)
+                .values(post)
+                .returning({ id: schema.posts.id });
             if (category) {
-                const { id } = await this.categoriesService.createCategory({ name: category });
-                await this.categoriesService.addToPost({ postId: newPost[0].id, categoryId: id });
+                const { id } = await this.categoriesService.createCategory({
+                    name: category,
+                }, tx);
+                await this.categoriesService.addToPost({
+                    postId: posts[0].id,
+                    categoryId: id,
+                }, tx);
             }
         });
     }
+    ;
     async findAll() {
         return this.database.query.posts.findMany({
             with: { user: true, postsToCategories: true }

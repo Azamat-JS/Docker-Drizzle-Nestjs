@@ -7,15 +7,15 @@ export declare class UsersService {
         id: number;
         email: string | null;
         password: string | null;
-        posts: {
-            [x: string]: never;
-        }[];
         profile: {
             id: number;
             userId: number | null;
             age: number | null;
             bio: string | null;
         } | null;
+        posts: {
+            [x: string]: never;
+        }[];
     }[]>;
     createUser(user: typeof schema.users.$inferInsert): Promise<import("pg").QueryResult<never>>;
     createProfile(profile: typeof schema.profile.$inferInsert): Promise<void>;

@@ -8,15 +8,15 @@ export declare class UsersController {
         id: number;
         email: string | null;
         password: string | null;
-        posts: {
-            [x: string]: never;
-        }[];
         profile: {
             id: number;
             userId: number | null;
             age: number | null;
             bio: string | null;
         } | null;
+        posts: {
+            [x: string]: never;
+        }[];
     }[]>;
     createUser(request: CreateUserRequest): Promise<import("pg").QueryResult<never>>;
     createProfile(req: CreateProfileRequest): Promise<void>;
