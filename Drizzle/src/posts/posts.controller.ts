@@ -8,8 +8,8 @@ export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
-  create(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto);
+  create(@Body() request: CreatePostDto) {
+    return this.postsService.create({content: request.content, userId: request.userId}, request.category);
   }
 
   @Patch(':id')

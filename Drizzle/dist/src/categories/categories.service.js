@@ -22,13 +22,11 @@ let CategoriesService = class CategoriesService {
     constructor(database) {
         this.database = database;
     }
-    async createCategory(category) {
-        const newCategory = await this.database.insert(schema.categories).values(category);
-        return newCategory;
+    async createCategory(category, tx) {
+        return (await (tx || this.database).insert(schema.categories).values(category).returning({ id: schema.categories.id }))[0];
     }
-    async addToPost(postToCategory) {
-        const newPost = await this.database.insert(schema.postsToCategories).values(postToCategory);
-        return newPost;
+    async addToPost(postToCategory, tx) {
+        return (tx || this.database).insert(schema.postsToCategories).values(postToCategory);
     }
     async getCategories() {
         return this.database.query.categories.findMany({

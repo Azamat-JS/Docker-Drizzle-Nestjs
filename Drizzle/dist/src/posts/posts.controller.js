@@ -21,8 +21,8 @@ let PostsController = class PostsController {
     constructor(postsService) {
         this.postsService = postsService;
     }
-    create(createPostDto) {
-        return this.postsService.create(createPostDto);
+    create(request) {
+        return this.postsService.create({ content: request.content, userId: request.userId }, request.category);
     }
     async updatePost(postId, request) {
         return this.postsService.updatePost(parseInt(postId), request);

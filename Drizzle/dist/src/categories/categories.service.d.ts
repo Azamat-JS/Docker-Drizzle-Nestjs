@@ -1,10 +1,12 @@
-import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { NodePgDatabase, NodePgTransaction } from 'drizzle-orm/node-postgres';
 import * as schema from './schema';
 export declare class CategoriesService {
     private readonly database;
     constructor(database: NodePgDatabase<typeof schema>);
-    createCategory(category: typeof schema.categories.$inferInsert): Promise<import("pg").QueryResult<never>>;
-    addToPost(postToCategory: typeof schema.postsToCategories.$inferInsert): Promise<import("pg").QueryResult<never>>;
+    createCategory(category: typeof schema.categories.$inferInsert, tx?: NodePgTransaction<any, any>): Promise<{
+        id: number;
+    }>;
+    addToPost(postToCategory: typeof schema.postsToCategories.$inferInsert, tx?: NodePgTransaction<any, any>): Promise<import("pg").QueryResult<never>>;
     getCategories(): Promise<{
         id: number;
         name: string;

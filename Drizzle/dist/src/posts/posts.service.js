@@ -18,13 +18,22 @@ const database_connection_1 = require("../database/database-connection");
 const node_postgres_1 = require("drizzle-orm/node-postgres");
 const schema = require("./schema");
 const drizzle_orm_1 = require("drizzle-orm");
+const categories_service_1 = require("../categories/categories.service");
 let PostsService = class PostsService {
     database;
-    constructor(database) {
+    categoriesService;
+    constructor(database, categoriesService) {
         this.database = database;
+        this.categoriesService = categoriesService;
     }
-    create(post) {
-        return this.database.insert(schema.posts).values(post);
+    async create(post, category) {
+        await this.database.transaction(async (tx) => {
+            const newPost = await tx.insert(schema.posts).values(post).returning({ id: schema.posts.id });
+            if (category) {
+                const { id } = await this.categoriesService.createCategory({ name: category });
+                await this.categoriesService.addToPost({ postId: newPost[0].id, categoryId: id });
+            }
+        });
     }
     async findAll() {
         return this.database.query.posts.findMany({
@@ -44,6 +53,7 @@ exports.PostsService = PostsService;
 exports.PostsService = PostsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)(database_connection_1.DATABASE_CONNECTION)),
-    __metadata("design:paramtypes", [node_postgres_1.NodePgDatabase])
+    __metadata("design:paramtypes", [node_postgres_1.NodePgDatabase,
+        categories_service_1.CategoriesService])
 ], PostsService);
 //# sourceMappingURL=posts.service.js.map

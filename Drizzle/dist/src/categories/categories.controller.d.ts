@@ -4,7 +4,9 @@ export declare class CategoriesController {
     constructor(categoriesService: CategoriesService);
     createCategory(request: {
         name: string;
-    }): Promise<import("pg").QueryResult<never>>;
+    }): Promise<{
+        id: number;
+    }>;
     getCategories(): Promise<{
         id: number;
         name: string;

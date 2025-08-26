@@ -19,6 +19,7 @@ exports.CategoriesModule = CategoriesModule = __decorate([
         imports: [database_module_1.DatabaseModule],
         controllers: [categories_controller_1.CategoriesController],
         providers: [categories_service_1.CategoriesService],
+        exports: [categories_service_1.CategoriesService]
     })
 ], CategoriesModule);
 //# sourceMappingURL=categories.module.js.map
