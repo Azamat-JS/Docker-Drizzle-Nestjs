@@ -104,5 +104,15 @@ export declare class PostsController {
         user: {
             [x: string]: never;
         } | null;
+        postsToCategories: {
+            [x: string]: never;
+        }[];
     }[]>;
+    getPost(postId: string): Promise<{
+        id: number;
+        content: string | null;
+        published: boolean | null;
+        timestamp: Date | null;
+        userId: number | null;
+    } | undefined>;
 }

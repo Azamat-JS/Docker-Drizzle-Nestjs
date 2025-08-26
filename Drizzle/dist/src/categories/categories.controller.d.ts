@@ -4,7 +4,7 @@ export declare class CategoriesController {
     constructor(categoriesService: CategoriesService);
     createCategory(request: {
         name: string;
-    }): Promise<void>;
+    }): Promise<import("pg").QueryResult<never>>;
     getCategories(): Promise<{
         id: number;
         name: string;
@@ -16,5 +16,5 @@ export declare class CategoriesController {
     addToPost(request: {
         postId: number;
         categoryId: number;
-    }): Promise<void>;
+    }): Promise<import("pg").QueryResult<never>>;
 }

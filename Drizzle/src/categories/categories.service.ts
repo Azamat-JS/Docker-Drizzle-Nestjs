@@ -8,11 +8,13 @@ export class CategoriesService {
     constructor(@Inject(DATABASE_CONNECTION) private readonly database: NodePgDatabase<typeof schema>){}
 
     async createCategory(category: typeof schema.categories.$inferInsert){
-        await this.database.insert(schema.categories).values(category)
+       const newCategory = await this.database.insert(schema.categories).values(category)
+       return newCategory;
     }
 
     async addToPost(postToCategory: typeof schema.postsToCategories.$inferInsert){
-        await this.database.insert(schema.postsToCategories).values(postToCategory)
+      const newPost =   await this.database.insert(schema.postsToCategories).values(postToCategory);
+      return newPost
     }
 
     async getCategories(){

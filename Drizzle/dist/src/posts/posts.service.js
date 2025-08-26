@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const database_connection_1 = require("../database/database-connection");
 const node_postgres_1 = require("drizzle-orm/node-postgres");
 const schema = require("./schema");
+const drizzle_orm_1 = require("drizzle-orm");
 let PostsService = class PostsService {
     database;
     constructor(database) {
@@ -27,17 +28,13 @@ let PostsService = class PostsService {
     }
     async findAll() {
         return this.database.query.posts.findMany({
-            with: { user: true }
+            with: { user: true, postsToCategories: true }
         });
     }
-    findOne(id) {
-        return `This action returns a #${id} post`;
-    }
-    update(id, updatePostDto) {
-        return `This action updates a #${id} post`;
-    }
-    remove(id) {
-        return `This action removes a #${id} post`;
+    async getPost(postId) {
+        return this.database.query.posts.findFirst({
+            where: (0, drizzle_orm_1.eq)(schema.posts.id, postId)
+        });
     }
 };
 exports.PostsService = PostsService;

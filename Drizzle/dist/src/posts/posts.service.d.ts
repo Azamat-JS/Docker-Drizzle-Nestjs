@@ -1,4 +1,3 @@
-import { UpdatePostDto } from './dto/update-post.dto';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as schema from './schema';
 export declare class PostsService {
@@ -105,8 +104,15 @@ export declare class PostsService {
         user: {
             [x: string]: never;
         } | null;
+        postsToCategories: {
+            [x: string]: never;
+        }[];
     }[]>;
-    findOne(id: number): string;
-    update(id: number, updatePostDto: UpdatePostDto): string;
-    remove(id: number): string;
+    getPost(postId: number): Promise<{
+        id: number;
+        content: string | null;
+        published: boolean | null;
+        timestamp: Date | null;
+        userId: number | null;
+    } | undefined>;
 }
