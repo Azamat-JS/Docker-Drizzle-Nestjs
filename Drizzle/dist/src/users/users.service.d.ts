@@ -4,9 +4,9 @@ export declare class UsersService {
     private readonly database;
     constructor(database: NodePgDatabase<typeof schema>);
     getUsers(): Promise<{
-        password: string | null;
         id: number;
         email: string | null;
+        password: string | null;
         posts: {
             [x: string]: never;
         }[];

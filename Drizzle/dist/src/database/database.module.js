@@ -14,6 +14,7 @@ const pg_1 = require("pg");
 const node_postgres_1 = require("drizzle-orm/node-postgres");
 const userSchema = require("../users/schema");
 const postSchema = require("../posts/schema");
+const categoriesSchema = require("../categories/schema");
 let DatabaseModule = class DatabaseModule {
 };
 exports.DatabaseModule = DatabaseModule;
@@ -29,7 +30,8 @@ exports.DatabaseModule = DatabaseModule = __decorate([
                     return (0, node_postgres_1.drizzle)(pool, {
                         schema: {
                             ...userSchema,
-                            ...postSchema
+                            ...postSchema,
+                            ...categoriesSchema
                         },
                     });
                 },

@@ -92,4 +92,5 @@ export declare const posts: import("drizzle-orm/pg-core").PgTableWithColumns<{
 }>;
 export declare const postRelations: import("drizzle-orm").Relations<"post", {
     user: import("drizzle-orm").One<"users", false>;
+    postsToCategories: import("drizzle-orm").Many<"posts_to_categories">;
 }>;
